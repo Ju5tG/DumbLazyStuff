@@ -9,7 +9,7 @@ $allMembers = $array1 + $array2 + $array3 + $array4
 
 <# Create a function to get a unique random member from the combined array that is not from the same array #>
 function Get-UniqueRandomMember($assigned, $sourceArray, $assignedMembers) {
-    $validMembers = $sourceArray | Where-Object { $ -ne $assigned -and -not $assignedMembers.Contains($) }
+    $validMembers = $sourceArray | Where-Object { $_ -ne $assigned -and -not $assignedMembers.Contains($_) }
     $validMembers | Get-Random
 }
 
@@ -38,6 +38,6 @@ foreach ($member in $array4) {
     $assignedMembers += $assignments[$member]
 }
 
-<# Output the assignments #>
-$assignments.GetEnumerator() | ForEach-Object { "$($.Key) is assigned to $($.Value)" }
-$assignments | Format-Table
+$assignments.GetEnumerator() | ForEach-Object { "$($_.Key) gives gifts to $($_.Value)" }
+$assignments.GetEnumerator() | Select-Object @{l='From';e={$_.Key}},@{l='To';e={$_.Value}}
+
